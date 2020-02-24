@@ -1,0 +1,81 @@
+{
+  "name": "Electron-App",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/main/main.js",
+  "build": {
+    "files": [
+      "main/",
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "directories": {
+      "output": "release"
+    },
+    "appId": "c1_destop_tool",
+    "asar": false
+  },
+  "scripts": {
+    "start": "concurrently \"npm run start:main\" \"npm run start:renderer\"",
+    "build": "umi build",
+    "test": "APP_ROOT=src/renderer umi test",
+    "lint": "eslint --ext .js src/renderer",
+    "precommit": "lint-staged",
+    "start:main": "cross-env NODE_ENV=development nodemon --watch main.js --exec \"electron ./main/main.js\"",
+    "start:renderer": "BROWSER=none APP_ROOT=./renderer umi dev",
+    "build:renderer": "cross-env APP_ROOT=./renderer umi build",
+    "debug:main": "electron --inspect=5858 -w ./main/main.js",
+    "pack": "npm run build:renderer && electron-builder --dir",
+    "dist": "electron-builder",
+    "dist-mac": "electron-builder -m",
+    "dist-win": "electron-builder -w",
+    "dist-linux": "electron-builder -l",
+    "dist-all": "electron-builder -mwl",
+    "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "antd": "^3.26.11",
+    "classnames": "^2.2.6",
+    "dva": "^2.6.0-beta.6",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.10.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "concurrently": "^5.1.0",
+    "cross-env": "^7.0.0",
+    "electron": "^8.0.1",
+    "electron-builder": "^22.3.2",
+    "electron-debug": "^3.0.1",
+    "electron-webpack": "^2.7.4",
+    "eslint": "^5.4.0",
+    "eslint-config-umi": "^1.4.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "nodemon": "^2.0.2",
+    "react-test-renderer": "^16.7.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "umi": "^2.13.3",
+    "umi-plugin-react": "^1.15.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
