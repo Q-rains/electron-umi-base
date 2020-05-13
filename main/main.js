@@ -1,8 +1,10 @@
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow } = require('electron');
+
 const setApplicationMenu = require('./utils/menu');
+const installDevtoolExt = require('./utils/installDevtoolExt');
 const setIpc = require('./ipc/index');
 const { NODE_ENV } = process.env;
 
@@ -24,6 +26,9 @@ function createWindow() {
 
   if (NODE_ENV === 'development') {
     console.log('development');
+    // 安装调试工具拓展
+    installDevtoolExt();
+
     mainWindow.loadURL('http://localhost:8000/#/');
     mainWindow.webContents.openDevTools();
   } else {

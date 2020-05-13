@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from './index.css';
-import { Card, Button, Input, Divider } from 'antd';
+import { Button, Input } from 'antd';
 import Link from 'umi/link';
 
 const { Search } = Input;
-const { ipcRenderer, shell } = window.electron;
+const { ipcRenderer } = window.electron;
 const path = window.path;
 
+console.log(ipcRenderer);
+console.log(path);
 export default class DemoPage1 extends React.PureComponent {
 
   handleSendMessage = (value) => {
@@ -24,8 +26,7 @@ export default class DemoPage1 extends React.PureComponent {
 
 
   render() {
-    console.log(ipcRenderer);
-    console.log(path);
+
     return (
       <div className={styles.normal}>
         <h3>这是demo页1</h3>

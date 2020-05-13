@@ -69,6 +69,12 @@
 
 需要在 renderer/public/window_node_api.js中引入相关的api,并挂载到window下才可以
 
+### 如何拓展devtools插件
+
+通过 `electron-devtools-installer`库安装
+在 `development`环境下，已默认安装 react-devtools 和 redux-devtools ; 如需要其它插件，可在文件 `main/utils/installlDevtoolExt.js` 中增加
+文档参考： https://github.com/MarshallOfSound/electron-devtools-installer
+
 ### 打包
 
 ```javascript
