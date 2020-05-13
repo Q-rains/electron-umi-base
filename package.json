@@ -5,6 +5,7 @@
   "main": "./dist/main/main.js",
   "build": {
     "files": [
+      "appdoc/",
       "main/",
       "dist/",
       "node_modules/",
@@ -41,7 +42,11 @@
   "dependencies": {
     "antd": "^4.2.2",
     "classnames": "^2.2.6",
+    "directory-tree": "^2.2.4",
     "dva": "^2.6.0-beta.6",
+    "github-markdown-css": "^4.0.0",
+    "highlight.js": "^10.0.3",
+    "marked": "^1.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.10.1",
     "react": "^16.12.0",

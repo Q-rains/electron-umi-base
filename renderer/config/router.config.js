@@ -1,5 +1,9 @@
 export default [
   {
+    path: '/docs',
+    component: './appdoc/index',
+  },
+  {
     path: '/',
     component: '../layouts/index.js',
     routes: [
@@ -11,6 +15,10 @@ export default [
         path: '/page2',
         component: './page2/page2.js',
       },
+      // {
+      //   path: '/docs',
+      //   component: './appdoc/index',
+      // },
     ],
   },
 ];

@@ -2,6 +2,13 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs');
 const { app, BrowserWindow } = require('electron');
+const dirTree = require('directory-tree');
+
+console.log('tree');
+console.log(dirTree(path.join(__dirname, '../appdoc')));
+// 文档文件夹的tree obj，在render中用 remote.getGlobal取用
+global.APP_DOC_TREE = dirTree(path.join(__dirname, '../appdoc'));
+
 
 const setApplicationMenu = require('./utils/menu');
 const installDevtoolExt = require('./utils/installDevtoolExt');

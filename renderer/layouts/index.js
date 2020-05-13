@@ -28,7 +28,7 @@ class BasicLayout extends React.Component {
           collapsedWidth="0"
         >
           <div className={styles.logo}>
-            <img className='logo-img' src={logo}  />
+            <img className='logo-img' src={logo} />
             MINIEYE
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['/']} selectedKeys={[location.pathname]}
@@ -38,6 +38,9 @@ class BasicLayout extends React.Component {
             </Menu.Item>
             <Menu.Item key="/page2" icon={<VideoCameraOutlined />}>
               page2
+            </Menu.Item>
+            <Menu.Item key="/docs" icon={<VideoCameraOutlined />}>
+              文档
             </Menu.Item>
           </Menu>
         </Sider>
