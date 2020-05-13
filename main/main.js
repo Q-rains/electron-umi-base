@@ -1,19 +1,20 @@
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const setApplicationMenu = require('./utils/menu');
+const setIpc = require('./ipc/index');
 const { NODE_ENV } = process.env;
 
 let mainWindow = null;
 
 const preloadPath = path.join(__dirname, '../dist/renderer/window_node_api.js');
 const MAIN_WINDOW_CONFIG = {
-  height: 600,
-  width: 800,
+  height: 720,
+  width: 1280,
   webPreferences: {
     nodeIntegration: true,
-    preload: fs.existsSync(preloadPath) ? preloadPath :null,
+    preload: fs.existsSync(preloadPath) ? preloadPath : null,
   },
 };
 
@@ -42,7 +43,11 @@ function createWindow() {
   });
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  setIpc();
+
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

@@ -1,11 +1,16 @@
-
-export default  [
+export default [
   {
     path: '/',
-    component: './index',
+    component: '../layouts/index.js',
+    routes: [
+      {
+        path: '/',
+        component: './page1/index',
+      },
+      {
+        path: '/page2',
+        component: './page2/page2.js',
+      },
+    ],
   },
-  {
-    path:'/page1',
-    component: './page1/page1.js'
-  }
-]
+];
