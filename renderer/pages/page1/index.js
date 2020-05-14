@@ -5,10 +5,7 @@ import Link from 'umi/link';
 
 const { Search } = Input;
 const { ipcRenderer } = window.electron;
-const path = window.path;
 
-console.log(ipcRenderer);
-console.log(path);
 export default class DemoPage1 extends React.PureComponent {
 
   handleSendMessage = (value) => {
