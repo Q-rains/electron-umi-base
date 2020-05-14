@@ -2,12 +2,10 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs');
 const { app, BrowserWindow } = require('electron');
-const dirTree = require('directory-tree');
+const GLOBAL_CONFIG = require('./config/config.global');
 
-console.log('tree');
-console.log(dirTree(path.join(__dirname, '../appdoc')));
-// 文档文件夹的tree obj，在render中用 remote.getGlobal取用
-global.APP_DOC_TREE = dirTree(path.join(__dirname, '../appdoc'));
+/* global 配置 */
+global.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
 
 const setApplicationMenu = require('./utils/menu');
@@ -29,7 +27,6 @@ const MAIN_WINDOW_CONFIG = {
 
 function createWindow() {
   mainWindow = new BrowserWindow(MAIN_WINDOW_CONFIG);
-  setApplicationMenu();
 
   if (NODE_ENV === 'development') {
     console.log('development');
@@ -49,6 +46,8 @@ function createWindow() {
     );
 
   }
+
+  setApplicationMenu();
 
   mainWindow.on('closed', () => {
     mainWindow = null;
