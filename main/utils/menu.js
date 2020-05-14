@@ -24,11 +24,7 @@ const template = [
     submenu: [
       {
         label: 'doc',
-        submenu: [
-          {
-            label: 'doc',
-          },
-        ],
+        click: (item, focusedWindow) => { focusedWindow.send('openPage', 'doc');},
       },
     ],
   },
@@ -59,8 +55,8 @@ if (process.platform === 'darwin') {
   });
 }
 
-module.exports = function() {
+module.exports = function(mainWindow) {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
-}
+};
 
