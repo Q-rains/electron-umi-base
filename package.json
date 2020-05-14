@@ -21,7 +21,7 @@
     "asar": false
   },
   "scripts": {
-    "start": "concurrently \"npm run start:main\" \"npm run start:renderer\"",
+    "start": "concurrently \"npm run start:renderer\" \"npm run start:main\"",
     "build": "umi build",
     "test": "APP_ROOT=src/renderer umi test",
     "lint": "eslint --ext .js src/renderer",
