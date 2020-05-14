@@ -1,33 +1,15 @@
 {
-  "name": "Electron-App",
+  "name": "electron-umi-base",
   "version": "1.0.0",
   "private": true,
-  "main": "./dist/main/main.js",
-  "build": {
-    "files": [
-      "appdoc/",
-      "main/",
-      "dist/",
-      "node_modules/",
-      "package.json"
-    ],
-    "mac": {
-      "category": "public.app-category.productivity"
-    },
-    "directories": {
-      "output": "release"
-    },
-    "appId": "c1_destop_tool",
-    "asar": false
-  },
   "scripts": {
     "start": "concurrently \"npm run start:renderer\" \"npm run start:main\"",
-    "build": "umi build",
-    "test": "APP_ROOT=src/renderer umi test",
-    "lint": "eslint --ext .js src/renderer",
+    "build": "cross-env BABEL_POLYFILL=none APP_ROOT=./renderer umi build",
+    "test": "APP_ROOT=./renderer umi test",
+    "lint": "eslint --ext .js ./renderer",
     "precommit": "lint-staged",
     "start:main": "cross-env NODE_ENV=development nodemon --watch main.js --exec \"electron ./main/main.js\"",
-    "start:renderer": "BROWSER=none APP_ROOT=./renderer umi dev",
+    "start:renderer": "cross-env BROWSER=none APP_ROOT=./renderer BABEL_POLYFILL=none umi dev",
     "build:renderer": "cross-env APP_ROOT=./renderer umi build",
     "debug:main": "electron --inspect=5858 -w ./main/main.js",
     "pack": "npm run build:renderer && electron-builder --dir",
@@ -38,6 +20,64 @@
     "dist-all": "electron-builder -mwl",
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
     "postinstall": "electron-builder install-app-deps"
+  },
+  "main": "main/main.js",
+  "build": {
+    "productName": "MINIEYE-Destop",
+    "appId": "com.electron.xxx",
+    "copyright": "Copyright © xxxx",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "appdoc/",
+      "build/",
+      "main/",
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "icon": "build/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 110,
+          "y": 280,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": [
+        "squirrel"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "asar": false
   },
   "dependencies": {
     "antd": "^4.2.2",
