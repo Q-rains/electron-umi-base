@@ -21,17 +21,19 @@
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
     "postinstall": "electron-builder install-app-deps"
   },
-  "main": "main/main.js",
+  "main": "./main/main.js",
   "build": {
-    "productName": "MINIEYE-Destop",
+    "productName": "MINIEYE-DESTOP-APP",
     "appId": "com.electron.xxx",
     "copyright": "Copyright © xxxx",
+    "extraMetadata": {
+      "main": "./main/main.js"
+    },
     "directories": {
       "output": "release"
     },
     "files": [
       "appdoc/",
-      "build/",
       "main/",
       "dist/",
       "node_modules/",
@@ -39,12 +41,10 @@
     ],
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": [
-        "dmg",
-        "zip"
-      ]
+      "target": "default"
     },
     "dmg": {
+      "background": "build/appdmg.png",
       "icon": "build/icon.icns",
       "iconSize": 100,
       "contents": [
@@ -77,39 +77,41 @@
       ],
       "icon": "build/icon.ico"
     },
-    "asar": false
+    "asar": {
+      "smartUnpack": true
+    }
   },
   "dependencies": {
-    "antd": "^4.2.2",
-    "classnames": "^2.2.6",
-    "directory-tree": "^2.2.4",
-    "dva": "^2.6.0-beta.6",
-    "github-markdown-css": "^4.0.0",
-    "highlight.js": "^10.0.3",
-    "marked": "^1.0.0",
-    "prop-types": "^15.7.2",
-    "query-string": "^6.10.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "directory-tree": "^2.2.4"
   },
   "devDependencies": {
+    "antd": "^4.2.2",
     "babel-eslint": "^9.0.0",
+    "classnames": "^2.2.6",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.0",
-    "electron": "^8.0.1",
-    "electron-builder": "^22.3.2",
+    "dva": "^2.6.0-beta.6",
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0",
+    "electron-builder-squirrel-windows": "^22.6.1",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^3.0.0",
-    "electron-webpack": "^2.7.4",
     "eslint": "^5.4.0",
     "eslint-config-umi": "^1.4.0",
     "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "github-markdown-css": "^4.0.0",
+    "highlight.js": "^10.0.3",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
+    "marked": "^1.0.0",
     "nodemon": "^2.0.2",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.10.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-test-renderer": "^16.7.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "umi": "^2.13.3",
@@ -122,6 +124,6 @@
     ]
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   }
 }
