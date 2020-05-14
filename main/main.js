@@ -3,15 +3,13 @@ const url = require('url');
 const fs = require('fs');
 const { app, BrowserWindow } = require('electron');
 const GLOBAL_CONFIG = require('./config/config.global');
+const setApplicationMenu = require('./utils/menu');
+const setIpc = require('./ipc/index');
+
+const { NODE_ENV } = process.env;
 
 /* global 配置 */
 global.GLOBAL_CONFIG = GLOBAL_CONFIG;
-
-
-const setApplicationMenu = require('./utils/menu');
-const installDevtoolExt = require('./utils/installDevtoolExt');
-const setIpc = require('./ipc/index');
-const { NODE_ENV } = process.env;
 
 let mainWindow = null;
 
@@ -30,6 +28,7 @@ function createWindow() {
 
   if (NODE_ENV === 'development') {
     console.log('development');
+    const installDevtoolExt = require('./utils/installDevtoolExt');
     // 安装调试工具拓展
     installDevtoolExt();
 
