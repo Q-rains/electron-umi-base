@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'antd';
+import { Alert } from 'antd';
 import Markdown from '@/components/Markdown';
 
 const fsPromises = window.fsPromises;
@@ -20,10 +20,10 @@ export default class markdownFileShow extends React.PureComponent {
     errorMsg: '',
   };
 
+  // todo 处理错误情况
   componentDidUpdate(prevProps) {
     const { filePath } = this.props;
     if (filePath !== prevProps.filePath) {
-      // todo 读取本地文件
       this.readLocalMarkdownFile(filePath);
     }
   }
@@ -43,13 +43,24 @@ export default class markdownFileShow extends React.PureComponent {
 
     this.setState({
       fileData: fileData,
+      isError: false,
+      errorMsg: '',
     });
-    console.log(fileData);
+
   }
 
 
   render() {
-    const { fileData } = this.state;
+    const { fileData, isError, errorMsg } = this.state;
+
+    if (isError) {
+      return <Alert
+        message="Error"
+        description={errorMsg}
+        type="error"
+        showIcon
+      />;
+    }
 
     return (
       <Markdown markdown={fileData} />

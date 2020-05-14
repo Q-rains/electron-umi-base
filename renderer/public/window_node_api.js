@@ -8,4 +8,5 @@ const path = require('path');
 window.path = path;
 window.electron = require('electron');
 window.fsPromises = require('fs').promises;
+window.dirTree = require('directory-tree');
 
