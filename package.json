@@ -12,75 +12,16 @@
     "start:renderer": "cross-env BROWSER=none APP_ROOT=./renderer BABEL_POLYFILL=none umi dev",
     "build:renderer": "cross-env APP_ROOT=./renderer umi build",
     "debug:main": "electron --inspect=5858 -w ./main/main.js",
-    "pack": "npm run build:renderer && electron-builder --dir",
-    "dist": "electron-builder",
-    "dist-mac": "electron-builder -m",
-    "dist-win": "electron-builder -w",
-    "dist-linux": "electron-builder -l",
-    "dist-all": "electron-builder -mwl",
+    "pack": "npm run build:renderer && electron-builder --dir --config ./electron-builder.config.js",
+    "dist": "electron-builder --config ./electron-builder.config.js",
+    "dist-mac": "electron-builder -m --config ./electron-builder.config.js",
+    "dist-win": "electron-builder -w --config ./electron-builder.config.js",
+    "dist-linux": "electron-builder -l --config ./electron-builder.config.js",
+    "dist-all": "electron-builder -mwl --config ./electron-builder.config.js",
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
     "postinstall": "electron-builder install-app-deps"
   },
   "main": "./main/main.js",
-  "build": {
-    "productName": "MINIEYE-DESTOP-APP",
-    "appId": "com.electron.xxx",
-    "copyright": "Copyright © xxxx",
-    "extraMetadata": {
-      "main": "./main/main.js"
-    },
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "appdoc/",
-      "main/",
-      "dist/",
-      "node_modules/",
-      "package.json"
-    ],
-    "mac": {
-      "category": "public.app-category.developer-tools",
-      "target": "default"
-    },
-    "dmg": {
-      "background": "build/appdmg.png",
-      "icon": "build/icon.icns",
-      "iconSize": 100,
-      "contents": [
-        {
-          "x": 380,
-          "y": 280,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 110,
-          "y": 280,
-          "type": "file"
-        }
-      ],
-      "window": {
-        "width": 500,
-        "height": 500
-      }
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
-    },
-    "win": {
-      "target": [
-        "squirrel"
-      ],
-      "icon": "build/icon.ico"
-    },
-    "asar": {
-      "smartUnpack": true
-    }
-  },
   "dependencies": {
     "directory-tree": "^2.2.4"
   },
