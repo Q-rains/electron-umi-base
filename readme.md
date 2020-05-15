@@ -34,19 +34,20 @@
 `-- README.md                             // 项目说明文档
 ```
 
-## 环境搭建
-### 安装
+### 环境搭建
 
-然后通过npm下载依赖
+##### 安装
 
-```javascript
-  $ npm install
+通过npm下载依赖
+```
+   npm install
 ```
 
-### 开发
+##### 开发
+
 * 同时启动
-```javascript
-  $ npm start
+```
+   npm start
 ```
 同时启动主进程和渲染进程，渲染进程编译完成会迟于渲染进程，初次显示为空白，需要待渲染进程
 准备完成后，通过目录或快捷键手动刷新(目录 `view/refresh` )
@@ -56,76 +57,75 @@
 首先通过以下命令启动渲染进程(默认端口：8000)
 
 ```javascript
-  $ npm run start:renderer
+   npm run start:renderer
 ```
 
 然后启动主进程
 
 ```javascript
-  $ npm run start:main
+   npm run start:main
+```
+##### 依赖包安装
+**！！！仅在生产环境依赖的包安装在 dependencies 下**
+
+开发过程中，需要引入各种npm包，安装时需要注意安装类型，在打包时，`node_modules`只会打入 `dependencies` 包
+
+* node相关，在生产环境使用的包，应安装为 `dependencies`，
+* node中在`NODE_ENV=development`环境时使用的包，应安装为 `devDependencies`，且仅在`NODE_ENV=development`下引入使用
+* 前端 react 的包由于会经过了react脚手架打包，生产环境不需要使用，应安装为 `devDependencies`
+
+```
+// 生产环境包，对应写入package.json 中 dependencies 下
+npm install package-name  
+
+// 开发环境，对应写入 package.json 中 devDependencies 下
+npm install package-name --save-dev  // 开发环境包
 ```
 
-### 如何使用node的api
 
-需要在 renderer/public/window_node_api.js中引入相关的api,并挂载到window下才可以
+##### 如何使用node的api
 
-### 如何拓展devtools插件
+node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 中引入相关的api，并挂载到window下，即可在react中使用
+
+##### 如何拓展devtools插件
 
 通过 `electron-devtools-installer`库安装
 在 `development`环境下，已默认安装 react-devtools 和 redux-devtools ; 如需要其它插件，可在文件 `main/utils/installlDevtoolExt.js` 中增加
-文档参考： https://github.com/MarshallOfSound/electron-devtools-installer
+文档参考： [electron-devtools-installer](https://github.com/MarshallOfSound/electron-devtools-installer)
 
-### 打包
+### 项目打包
 
-```javascript
-  $ npm run pack  // 打包macOS
-  $ npm run exe   // 打包windows
+##### 构建测试包
+```
+npm run pack   // 仅输出包,方便测试
 ```
 
-如果想把代码打包成一个dmg文件或者zip文件，可以执行以下命令
+##### 构建安装包
 
-```javascript
-  $ npm run dist
+1. 执行前端资源打包
+
+```
+npm run build  // react资源打包
 ```
 
-### 打包配置说明 [`package.json`](./package.json)
+2. 运行electron构建命令,输出安装包
+
+```
+npm run dist  // 按当前平台打包
+npm run dist-mac // mac包
+npm run dist-win // windows包
+npm run dist-linux // linux包
+npm run dist-all   // 所有平台包
+```
+
+
+#### 打包配置说明 [`electron-builder.config.js`](./electron-builder.config.js)
+
+单独抽出了js配置文件，在使用时通过 `--config` 参数指定，如： `electron-builder --config ./electron-builder.config.js`
+
+各配置规则请参考文件中注释和官方文档：
 
 [electron-builder-参数参考](https://www.electron.build/configuration/configuration)
 
 [category-Mac分类参考](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8)
 
-```js
-{
-  ...
-  "build": {
-    "productName": "LittleStrong",// 程序名称
-    "files": [ // 需要打包的文件
-      "dist/",
-      "node_modules/",
-      "package.json"
-    ],
-    "mac": { // 打包mac版本
-      "category": "your.app.category.type", // mac app分类 
-      "target": [ // 打包类型
-        "dmg",
-        "zip"
-      ]
-    },
-    "win": { // 打包windows版本
-      "target": [ // 打包类型
-        "nsis"
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": true,
-      "allowToChangeInstallationDirectory": true
-    },
-    "directories": { // 打包后输出目录
-      "output": "release"
-    },
-    "appId": "com.cn.littlestrong.demo", // appstore包名
-    "asar": false //  是否加密处理
-  },
-}
-```
