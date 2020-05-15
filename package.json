@@ -66,5 +66,9 @@
   },
   "engines": {
     "node": ">=10.0.0"
+  },
+  "author": {
+    "email": "duqiuyu@minieye.cc",
+    "name": "d"
   }
 }

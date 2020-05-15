@@ -36,7 +36,7 @@ module.exports = {
     target: ['AppImage', 'deb'],
   },
   win: {
-    target: ['squirrel'],
+    target: ['squirrel', 'portable'],
     icon: 'build/icon.ico', // 客户端图标
   },
   asar: {
