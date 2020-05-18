@@ -23,7 +23,9 @@
   },
   "main": "./main/main.js",
   "dependencies": {
-    "directory-tree": "^2.2.4"
+    "axios": "^0.19.2",
+    "directory-tree": "^2.2.4",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "antd": "^4.2.2",
@@ -48,6 +50,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "marked": "^1.0.0",
+    "mockjs": "^1.1.0",
     "nodemon": "^2.0.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.10.1",
