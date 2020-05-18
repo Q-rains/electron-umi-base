@@ -43,6 +43,7 @@ const errorHandler = (error) => {
   return response;
 };
 
+axios.defaults.withCredentials = true;
 const instance = axios.create();
 
 // 添加响应拦截器,做错误处理
