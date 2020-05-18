@@ -25,7 +25,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "directory-tree": "^2.2.4",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "ws": "^7.3.0"
   },
   "devDependencies": {
     "antd": "^4.2.2",
