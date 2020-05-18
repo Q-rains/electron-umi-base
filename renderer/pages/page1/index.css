@@ -1,5 +1,13 @@
 
 .normal {
-  font-family: Georgia, sans-serif;
-  margin-top: 4em;
+	font-family: Georgia, sans-serif;
+	margin-top: 4em;
+}
+
+.tableImg {
+	height: 28px;
+}
+
+.bigImg{
+	max-width: 100%;
 }
