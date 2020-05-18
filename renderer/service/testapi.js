@@ -1,4 +1,4 @@
-import axiosInstance from '@/uitls/request';
+import axiosInstance from '@/utils/request';
 
 /**
  * eg. 请求发生http错误

@@ -2,7 +2,7 @@ import React from 'react';
 import lodash from 'lodash';
 import { Button, Input, Table, Tag, Divider, Modal, Space } from 'antd';
 import { getApiTestHttpError, getApiList } from '@/service/testapi';
-import { confirmPromise, delay } from '@/uitls/util';
+import { confirmPromise, delay } from '@/utils/util';
 import styles from './index.css';
 import Link from 'umi/link';
 
