@@ -15,6 +15,10 @@ export default [
         path: '/page2',
         component: './page2/page2.js',
       },
+      {
+        path: '/check-update',
+        component: './appUpdate/index',
+      },
       // {
       //   path: '/docs',
       //   component: './appdoc/index',

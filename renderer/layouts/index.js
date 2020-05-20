@@ -42,6 +42,9 @@ class BasicLayout extends React.Component {
             <Menu.Item key="/docs" icon={<FileTextOutlined />}>
               文档
             </Menu.Item>
+            <Menu.Item key="/check-update" icon={<FileTextOutlined />}>
+              检查更新
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
