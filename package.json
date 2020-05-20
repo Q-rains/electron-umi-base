@@ -25,6 +25,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "directory-tree": "^2.2.4",
+    "electron-log": "^4.1.2",
+    "electron-updater": "^4.3.1",
     "lodash": "^4.17.15",
     "ws": "^7.3.0"
   },
@@ -34,6 +36,7 @@
     "classnames": "^2.2.6",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.0",
+    "devtron": "^1.4.0",
     "dva": "^2.6.0-beta.6",
     "electron": "^8.2.5",
     "electron-builder": "^22.6.0",
