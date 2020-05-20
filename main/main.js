@@ -4,6 +4,7 @@ const fs = require('fs');
 const { app, BrowserWindow } = require('electron');
 const GLOBAL_CONFIG = require('./config/config.global');
 const setApplicationMenu = require('./utils/menu');
+const AppUpdater = require('./utils/appUpdater');
 const setIpc = require('./ipc/index');
 
 const { NODE_ENV } = process.env;
@@ -46,7 +47,6 @@ function createWindow() {
 
   }
 
-  setApplicationMenu();
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -55,8 +55,9 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
-  setIpc();
-
+  setApplicationMenu(mainWindow);
+  const appUpdater = new AppUpdater(mainWindow);
+  setIpc(mainWindow, appUpdater);
 });
 
 app.on('window-all-closed', () => {
