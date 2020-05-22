@@ -9,12 +9,12 @@ module.exports = {
   appId: 'com.electron.xxx',
   copyright: 'Copyright © xxxx', //版权  信息
   extraMetadata: {   // 注入打包后package.json的属性
-    main: './main/main.js', // 修改包入口
+    main: './index.js', // 修改包入口
   },
   directories: {
     output: 'release',  // 输出文件夹
   },
-  files: ['appdoc/', 'main/', 'dist/', 'node_modules/', 'package.json'], // 需要打包的文件
+  files: ['index.js', 'appdoc/', 'main/', 'dist/', 'node_modules/', 'package.json'], // 需要打包的文件
   // mac打包配置
   mac: {
     // 包类型，参见 https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8
@@ -50,8 +50,14 @@ module.exports = {
     createStartMenuShortcut: true,// 创建开始菜单图标
     shortcutName: 'MINIEYE-DESTOP-APP', // 图标名称
   },
-  asar: {
-    smartUnpack: true,  // asar打包, 智能提取第三方模块
-  },
-  // asar: false,
+  // asar: {
+  //   smartUnpack: true,  // asar打包, 智能提取第三方模块
+  // },
+  asar: false,
+  publish: [
+    {
+      provider: 'generic',
+      url: 'http://127.0.0.1:8080/release/',//更新服务器地址,请按实际部署修改
+    },
+  ],
 };
