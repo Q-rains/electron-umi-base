@@ -4,10 +4,9 @@ const fs = require('fs');
 const { app, BrowserWindow } = require('electron');
 const GLOBAL_CONFIG = require('./config/config.global');
 const setApplicationMenu = require('./utils/menu');
+const { isDevEnv } = require('./utils/util');
 const AppUpdater = require('./utils/appUpdater');
 const setIpc = require('./ipc/index');
-
-const { NODE_ENV } = process.env;
 
 /* global 配置 */
 global.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -27,7 +26,7 @@ const MAIN_WINDOW_CONFIG = {
 function createWindow() {
   mainWindow = new BrowserWindow(MAIN_WINDOW_CONFIG);
 
-  if (NODE_ENV === 'development') {
+  if (isDevEnv()) {
     console.log('development');
     const installDevtoolExt = require('./utils/installDevtoolExt');
     // 安装调试工具拓展
@@ -46,7 +45,6 @@ function createWindow() {
     );
 
   }
-
 
   mainWindow.on('closed', () => {
     mainWindow = null;
