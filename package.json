@@ -1,6 +1,6 @@
 {
   "name": "electron-umi-base",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run start:renderer\" \"npm run start:main\"",
@@ -8,10 +8,10 @@
     "test": "APP_ROOT=./renderer umi test",
     "lint": "eslint --ext .js ./renderer",
     "precommit": "lint-staged",
-    "start:main": "cross-env NODE_ENV=development nodemon --watch main.js --exec \"electron ./main/main.js\"",
+    "start:main": "cross-env NODE_ENV=development nodemon --watch main.js --exec \"electron ./\"",
     "start:renderer": "cross-env BROWSER=none APP_ROOT=./renderer BABEL_POLYFILL=none umi dev",
     "build:renderer": "cross-env APP_ROOT=./renderer umi build",
-    "debug:main": "electron --inspect=5858 -w ./main/main.js",
+    "debug:main": "electron --inspect=5858 -w ./",
     "pack": "npm run build:renderer && electron-builder --dir --config ./electron-builder.config.js",
     "dist": "electron-builder --config ./electron-builder.config.js",
     "dist-mac": "electron-builder -m --config ./electron-builder.config.js",
@@ -21,7 +21,7 @@
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\"",
     "postinstall": "electron-builder install-app-deps"
   },
-  "main": "./main/main.js",
+  "main": "./index.js",
   "dependencies": {
     "axios": "^0.19.2",
     "directory-tree": "^2.2.4",
