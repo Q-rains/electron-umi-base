@@ -100,6 +100,18 @@ npm install package-name --save-dev  // 开发环境包
 
 node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 中引入相关的api，并挂载到window下，即可在react中使用
 
+##### 数据请求
+* http请求：
+使用 `axios`,前端、node环境均可使用，`renderer/utils/request.js` 中进行了简单前端的统一请求配置
+文档参考[axios](http://axios-js.com/zh-cn/docs/)
+
+* socket请求：
+在node环境中，使用 `ws` 库，这是一个标准的WebSocket实现，文档参考[ws](https://github.com/websockets/ws)
+
+在electron中, 前端环境也能直接使用 `ws` 库， 在`renderer/public/window_node_api.js`中引入即可
+
+当然，在前端环境中，也可以直接使用浏览器标准的 Websocket 接口，文档参考 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
+
 ##### 如何拓展devtools插件
 
 通过 `electron-devtools-installer`库安装
