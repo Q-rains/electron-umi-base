@@ -16,24 +16,37 @@
 |   |-- renderer                          // 页面编译目录
 |-- release                               // 打包输出目录
 |-- main                                  // 主程序目录
+    |-- config                            // main-process的配置文件
+    |-- ipc                               // main-process ipc逻辑
+    |-- utils                             // main-process 的一些工具方法
 |   `-- main.js                           // 主程序入口
 |-- renderer                              // React项目页面(umi根目录结构)
-|     |-- assets
-|     |   `-- yay.jpg
+|     |-- assets                          // 前端使用的图片等资源
 |     |-- config
-|     |   |-- config.js                   // umijs配置
-|     |   `-- webpack.config.js           // umijs-webpack配置
-|     |-- models
+|         `-- config.js                   // umijs配置
+|         `-- router.config.js            // umijs路由配置(项目采用配置式路由)
+|     |-- layouts                         // 通用的页面布局
+|     |-- mock                            // mock.js 模拟api配置 
+|     |-- models                          // redux dva的model配置
 |     |   `-- global.js
-|     |-- pages
-|         `-- index.js
-|     |-- public
+|     |-- pages                           // 页面文件
+|         |-- pagex
+|             `index.js
+|     |-- public                          // 直接使用的公共文件
 |         `-- window_node_api.js          // 如果需要引用node的api，需要在这个js里面提前引入，并挂载到window下
-|     `-- global.js
-|-- package.json                          // 项目依赖以及打包配置
+|     |-- service                         // 数据服务，包括ipc、ajax、socket
+|     |-- utils                           // 工具函数
+|         `-- request.js                  // axios 请求库的简单统一配置
+|         `-- util.js                     // 自己封装的工具函数库
+|     `-- global.js                       // 此文件会在入口文件的最前面被自动引入，可以在这里加载补丁，做一些初始化的操作等
+      `-- global.css                      // 全局的css文件，在前端入口文件最前被引入
+`-- dev-app-update.yml                    // electron-updater的开发环境配置(生成环境应配置 electron-builder.config.js 的 publish)      
+`-- electron-builder.config.js            // electron-builder的打包配置文件
+`-- index.js                              // 入口文件
+`-- package.json                          // 项目依赖以及打包配置
 `-- README.md                             // 项目说明文档
 ```
-
+其中 `renderer` 文件加下按照 `umi` 脚手架约定，参考文档：[目录及约定](https://umijs.org/zh/guide/app-structure.html)
 ### 环境搭建
 
 ##### 安装
