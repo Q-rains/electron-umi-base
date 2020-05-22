@@ -142,7 +142,8 @@ npm run dist-win // windows包
 npm run dist-linux // linux包
 npm run dist-all   // 所有平台包
 ```
-
+#### 打包后的客户端版本
+和 `package.json` 中的 `version` 属性一致，** ！！！正式打包前，请更新 `version` 值 **
 
 #### 打包配置说明 [`electron-builder.config.js`](./electron-builder.config.js)
 
@@ -154,3 +155,20 @@ npm run dist-all   // 所有平台包
 
 [category-Mac分类参考](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8)
 
+### 客户端更新
+
+* 没有包管理服务器
+
+
+使用 `electron-updater` ,逻辑见 `main/utils/appUpdater.js`,不需要有正式的包管理服务器，仅需静态文件服务即可。
+
+静态文件服务应包含打包后的所有文件(包括包文件和yml文件)，实际是每次更新时，会先下载比较 `latest-xx.yml` 文件
+
+生产环境配置 `electron-builder.config.js  publish` ,开发环境配置 `dev-app-update.yml`,设置静态文件服务的包文件夹存储地址即可
+
+
+* 有包管理服务器
+
+直接使用`electron`自带的 `autoUpdate` 接口，注意：包管理服务应提供对应要求的接口
+
+推荐开源的私有服务 [electron-release-server](https://github.com/ArekSredzki/electron-release-server)
