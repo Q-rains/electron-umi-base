@@ -162,6 +162,8 @@ npm run dist-all   // 所有平台包
 
 使用 `electron-updater` ,逻辑见 `main/utils/appUpdater.js`,不需要有正式的包管理服务器，仅需静态文件服务即可。
 
+参见文档 [electron-updater](https://www.electron.build/auto-update)
+
 静态文件服务应包含打包后的所有文件(包括包文件和yml文件)，实际是每次更新时，会先下载比较 `latest-xx.yml` 文件
 
 生产环境配置 `electron-builder.config.js  publish` ,开发环境配置 `dev-app-update.yml`,设置静态文件服务的包文件夹存储地址即可
@@ -170,6 +172,9 @@ npm run dist-all   // 所有平台包
 * 有包管理服务器
 
 直接使用`electron`自带的 `autoUpdate` 接口，注意：包管理服务应提供对应要求的接口
+
+参见文档：
+[Electron 更新](https://www.electronjs.org/docs/tutorial/updates)  [auto-updater Api](https://www.electronjs.org/docs/api/auto-updater)
 
 逻辑见 `main/utils/appAutoUpdater.js`，在`main/config/config.js`中配置服务地址，并在`main.js`中调用
 
