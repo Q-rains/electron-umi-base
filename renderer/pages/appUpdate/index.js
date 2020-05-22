@@ -1,14 +1,21 @@
-import { Button } from 'antd';
+import { Button, Progress } from 'antd';
 import React from 'react';
 
 const { ipcRenderer } = window.electron;
 
 const status = {
-  'checking-for-update': { checking: true, msg: '正在检查更新中......' },
-  'update-available': { checkIng: false, msg: '检查到新版本' },
-  'update-not-available': { checkIng: false, msg: '已是最新版本，不用更新' },
+  'checking-for-update': { checking: true, msg: '正在检查更新中......', downloadIng: false, downloaded: false },
+  'update-available': { checking: false, msg: '检查到新版本' },
+  'update-not-available': { checking: false, msg: '已是最新版本，不用更新' },
   'download-progress': { downloadIng: true, msg: '正在下载中' },
-  'update-downloaded': { downloadIng: false, downloaded: true, msg: '下载完成' },
+  'update-downloaded': { downloadIng: false, downloaded: true, msg: '下载完成', process: 0 },
+  cancel: {
+    checking: false,
+    downloadIng: false,
+    downloaded: false,
+    msg: '',
+    process: 0,
+  },
   error: {
     checking: false,
     downloadIng: false,
@@ -28,8 +35,6 @@ export default class AppUpdate extends React.PureComponent {
     process: 0,
   };
 
-  // todo 测试完资源服务器，完成后续更新逻辑
-
   componentDidMount() {
     ipcRenderer.on('appUpdater', this.handleCheckUpdateListener);
   }
@@ -47,7 +52,7 @@ export default class AppUpdate extends React.PureComponent {
     }
 
     if (updateEventName === 'error') {
-      mergeState.msg = `${status.error.msg} : ${data.toString()}`;
+      mergeState.msg = `${status.error.msg} : ${data && data.toString()}`;
     }
 
 
@@ -69,12 +74,20 @@ export default class AppUpdate extends React.PureComponent {
 
 
   render() {
-    const { checking, msg } = this.state;
+    const { checking, msg, downloaded, downloadIng, process } = this.state;
+    const isDownload = downloadIng || downloaded;
 
     return (
       <div>
-        <Button type="primary" loading={checking}
-                onClick={this.handleCheckUpdate}>{checking ? '检查中...' : '检查更新'}</Button>
+        {
+          isDownload ? (
+            <div>
+              <Progress percent={process} />
+            </div>
+          ) : (<Button type="primary" loading={checking}
+                       onClick={this.handleCheckUpdate}>{checking ? '检查中...' : '检查更新'}</Button>)
+        }
+
         <p>{msg}</p>
       </div>);
   }
