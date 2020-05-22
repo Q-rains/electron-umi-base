@@ -171,4 +171,7 @@ npm run dist-all   // 所有平台包
 
 直接使用`electron`自带的 `autoUpdate` 接口，注意：包管理服务应提供对应要求的接口
 
+逻辑见 `main/utils/appAutoUpdater.js`，在`main/config/config.js`中配置服务地址，并在`main.js`中调用
+
 推荐开源的私有服务 [electron-release-server](https://github.com/ArekSredzki/electron-release-server)
+
