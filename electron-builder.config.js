@@ -36,7 +36,7 @@ module.exports = {
     target: ['AppImage', 'deb'],
   },
   win: {
-    target: ['nsis', 'portable'],
+    target: ['nsis', 'portable','squirrel'],
     icon: 'build/icon.ico', // 客户端图标
   },
   nsis: {
