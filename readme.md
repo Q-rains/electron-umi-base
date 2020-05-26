@@ -112,6 +112,12 @@ node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 
 
 当然，在前端环境中，也可以直接使用浏览器标准的 Websocket 接口，文档参考 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
 
+##### 兼容问题？
+
+在electron项目中，运行环境是确定的，所以可以直接使用浏览器最新的各种特性，js/css均不需要再做额外的兼容处理。
+
+比如socket请求可以直接使用标准的实现，而不需要再采用`socket.io`等类似的兼容库实现。
+
 ##### 如何拓展devtools插件
 
 通过 `electron-devtools-installer`库安装
