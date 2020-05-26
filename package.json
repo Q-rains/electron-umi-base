@@ -8,7 +8,7 @@
     "test": "APP_ROOT=./renderer umi test",
     "lint": "eslint --ext .js ./renderer",
     "precommit": "lint-staged",
-    "start:main": "cross-env NODE_ENV=development nodemon --watch main.js --exec \"electron ./\"",
+    "start:main": "cross-env NODE_ENV=development nodemon --watch ./main/ --exec \"electron ./\"",
     "start:renderer": "cross-env BROWSER=none APP_ROOT=./renderer BABEL_POLYFILL=none umi dev",
     "build:renderer": "cross-env APP_ROOT=./renderer umi build",
     "debug:main": "electron --inspect=5858 -w ./",
