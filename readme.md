@@ -49,14 +49,14 @@
 其中 `renderer` 文件加下按照 `umi` 脚手架约定，参考文档：[目录及约定](https://umijs.org/zh/guide/app-structure.html)
 ### 环境搭建
 
-##### 安装
+#### 安装
 
 通过npm下载依赖
 ```
    npm install
 ```
 
-##### 开发
+#### 开发
 
 * 同时启动
 ```
@@ -78,7 +78,7 @@
 ```javascript
    npm run start:main
 ```
-##### 依赖包安装
+#### 依赖包安装
 **！！！仅在生产环境依赖的包安装在 dependencies 下**
 
 开发过程中，需要引入各种npm包，安装时需要注意安装类型，在打包时，`node_modules`只会打入 `dependencies` 包
@@ -96,11 +96,15 @@ npm install package-name --save-dev  // 开发环境包
 ```
 
 
-##### 如何使用node的api
+#### 如何使用node的api
 
 node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 中引入相关的api，并挂载到window下，即可在react中使用
 
-##### 数据请求
+#### 使用shell
+
+有些场景，使用shell命令更加简洁高效，在node环境中，推荐 `shelljs` 库执行各种shell命令，[shelljs](https://github.com/shelljs/shelljs)
+
+#### 数据请求
 * http请求：
 使用 `axios`,前端、node环境均可使用，`renderer/utils/request.js` 中进行了简单前端的统一请求配置
 文档参考[axios](http://axios-js.com/zh-cn/docs/)
@@ -112,13 +116,13 @@ node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 
 
 当然，在前端环境中，也可以直接使用浏览器标准的 Websocket 接口，文档参考 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
 
-##### 兼容问题？
+#### 兼容问题？
 
 在electron项目中，运行环境是确定的，所以可以直接使用浏览器最新的各种特性，js/css均不需要再做额外的兼容处理。
 
 比如socket请求可以直接使用标准的实现，而不需要再采用`socket.io`等类似的兼容库实现。
 
-##### 如何拓展devtools插件
+#### 如何拓展devtools插件
 
 通过 `electron-devtools-installer`库安装
 在 `development`环境下，已默认安装 react-devtools 和 redux-devtools ; 如需要其它插件，可在文件 `main/utils/installlDevtoolExt.js` 中增加
