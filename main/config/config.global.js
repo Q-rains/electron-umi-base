@@ -1,8 +1,10 @@
 const path = require('path');
-
+const {app} = require('electron');
+const plat = os.type().toLocaleLowerCase();
 /**
  * 暴露到global的一些配置
  * */
 module.exports = {
-  APP_DOC_PATH: path.join(__dirname, '../../appdoc'),
+  PLAT: plat,
+  APP_PATH: app.getAppPath(),
 };

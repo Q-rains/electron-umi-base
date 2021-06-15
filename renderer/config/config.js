@@ -1,30 +1,20 @@
-import pageRoutes from './router.config';
+import { defineConfig } from 'umi';
 
-// ref: https://umijs.org/config/
-export default {
-  history:'hash',
+export default defineConfig({
+  chainWebpack(config) {
+    // 设置 alias
+    config.target('electron-renderer')
+  },
+  webpack5: {},
+  history: { type: 'hash' },
   outputPath: `../dist/renderer`,
   publicPath: './',
-  treeShaking: true,
-  plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
-    ['umi-plugin-react', {
-      antd: true,
-      dva: true,
-      dynamicImport: false,
-      title: 'c1_destop_tool',
-      dll: false,
-      hardSource: false,
-      routes: {
-        exclude: [
-          /models\//,
-          /services\//,
-          /model\.(t|j)sx?$/,
-          /service\.(t|j)sx?$/,
-          /components\//,
-        ],
-      },
-    }],
+  nodeModulesTransform: {
+    type: 'none',
+  },
+  routes: [
+    { path: '/', component: '@/pages/index' },
+    { path: '/page2', component: '@/pages/Page2/index' },
   ],
-  routes: pageRoutes,
-}
+  fastRefresh: {},
+});

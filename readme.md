@@ -33,10 +33,9 @@
 |         |-- pagex
 |             `index.js
 |     |-- public                          // 直接使用的公共文件
-|         `-- window_node_api.js          // 如果需要引用node的api，需要在这个js里面提前引入，并挂载到window下
 |     |-- service                         // 数据服务，包括ipc、ajax、socket
 |     |-- utils                           // 工具函数
-|         `-- request.js                  // axios 请求库的简单统一配置
+|         `-- request.js                  // 请求库的简单统一配置
 |         `-- util.js                     // 自己封装的工具函数库
 |     `-- global.js                       // 此文件会在入口文件的最前面被自动引入，可以在这里加载补丁，做一些初始化的操作等
       `-- global.css                      // 全局的css文件，在前端入口文件最前被引入
@@ -96,9 +95,13 @@ npm install package-name --save-dev  // 开发环境包
 ```
 
 
-#### 如何使用node的api
+#### 如何使用electron/node的api
 
-node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 中引入相关的api，并挂载到window下，即可在react中使用
+配置了前端编译输出为 electron-renderer，直接使用require引入即可
+
+#### 数据缓存
+
+建议使用 `electron-store` 
 
 #### 使用shell
 
@@ -106,15 +109,12 @@ node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 
 
 #### 数据请求
 * http请求：
-使用 `axios`,前端、node环境均可使用，`renderer/utils/request.js` 中进行了简单前端的统一请求配置
-文档参考[axios](http://axios-js.com/zh-cn/docs/)
+使用 fetch/ajax 库，如 `umi/request` 、`axios` 等
 
 * socket请求：
 在node环境中，使用 `ws` 库，这是一个标准的WebSocket实现，文档参考[ws](https://github.com/websockets/ws)
-
-在electron中, 前端环境也能直接使用 `ws` 库， 在`renderer/public/window_node_api.js`中引入即可
-
-当然，在前端环境中，也可以直接使用浏览器标准的 Websocket 接口，文档参考 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
+  
+在前端环境中，也可以直接使用浏览器标准的 Websocket 接口，文档参考 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
 
 #### 兼容问题？
 

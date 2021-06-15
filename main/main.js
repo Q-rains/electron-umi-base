@@ -14,13 +14,13 @@ global.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
 let mainWindow = null;
 
-const preloadPath = path.join(__dirname, '../dist/renderer/window_node_api.js');
 const MAIN_WINDOW_CONFIG = {
   height: 720,
   width: 1280,
   webPreferences: {
+    enableRemoteModule: true,
     nodeIntegration: true,
-    preload: fs.existsSync(preloadPath) ? preloadPath : null,
+    contextIsolation: false,
   },
 };
 
@@ -29,9 +29,9 @@ function createWindow() {
 
   if (isDevEnv()) {
     console.log('development');
-    const installDevtoolExt = require('./utils/installDevtoolExt');
+    // const installDevtoolExt = require('./utils/installDevtoolExt');
     // 安装调试工具拓展
-    installDevtoolExt();
+    // installDevtoolExt();
 
     mainWindow.loadURL('http://localhost:8000/#/');
     mainWindow.webContents.openDevTools();
@@ -60,9 +60,9 @@ app.on('ready', () => {
   // const appUpdater = new AppUpdater(mainWindow);
 
   // 2.基于自带的 autoUpdate 和包版本管理服务
-  const appUpdater = new AppAutoUpdater(mainWindow);
+  // const appUpdater = new AppAutoUpdater(mainWindow);
 
-  setIpc(mainWindow, appUpdater);
+  setIpc(mainWindow);
 });
 
 app.on('window-all-closed', () => {

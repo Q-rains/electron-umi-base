@@ -8,10 +8,10 @@ module.exports = function(mainWindow, appUpdater) {
     console.log('-----------------------');
   });
 
-  ipcMain.on('appUpdater', (event, data) => {
-    if (data === 'check') {
-      appUpdater.checkForUpdates();
-    }
-  });
+  // ipcMain.on('appUpdater', (event, data) => {
+  //   if (data === 'check') {
+  //     appUpdater.checkForUpdates();
+  //   }
+  // });
 
 };
